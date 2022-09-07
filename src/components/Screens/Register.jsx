@@ -1,0 +1,57 @@
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import InputBox from "../InputBox";
+import Logo from "../Logo";
+import SubmitButton from "../SubmitButton";
+
+export default function Register() {
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  return (
+    <Container>
+      <Logo />
+
+      <RegisterForm action="" onSubmit={handleSubmit}>
+        <InputBox name="email" placeholder="Email" />
+        <InputBox name="password" placeholder="Senha" />
+
+        <SubmitButton>Entrar</SubmitButton>
+      </RegisterForm>
+
+      <Link to={"/register"}>Primeira vez? Cadastre-se!</Link>
+    </Container>
+  );
+}
+
+const Container = styled.div`
+  & {
+    width: calc(100vw - (100vw - 100%));
+    min-height: 100vh;
+
+    flex-direction: column;
+
+    padding: 20px;
+
+    font-weight: 700;
+    font-size: 15px;
+
+    color: #ffffff;
+  }
+
+  h1 {
+    margin: 30px 0px;
+  }
+`;
+
+const RegisterForm = styled.form`
+  & {
+    flex-direction: column;
+
+    width: 100%;
+    height: 50%;
+
+    text-align: center;
+  }
+`;

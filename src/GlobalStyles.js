@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   :root {
@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
     vertical-align: middle;
     box-sizing: border-box;
 
-    font-family: 'Lexend Deca';
+    font-family: "Raleway";
     font-style: normal;
     font-weight: 400;
     font-size: var(--fontsize);
@@ -55,7 +55,10 @@ export const GlobalStyle = createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: black;
+    font-weight: 700;
+    font-size: 15px;
+    color: #FFFFFF;
+    margin: 30px 0px;
   }
 
   a:hover {
