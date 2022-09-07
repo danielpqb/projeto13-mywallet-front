@@ -6,6 +6,8 @@ import UserContext from "../Context/UserContext";
 import Login from "./Screens/Login";
 import Register from "./Screens/Register";
 import Balance from "./Screens/Balance";
+import NewIncome from "./Screens/NewIncome";
+import NewSpent from "./Screens/NewSpent";
 
 export default function App() {
   return (
@@ -17,6 +19,8 @@ export default function App() {
             <Route path="/" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/balance" element={<Balance />}></Route>
+            <Route path="/new-income" element={<NewIncome />}></Route>
+            <Route path="/new-spent" element={<NewSpent />}></Route>
           </Routes>
         </UserContext.Provider>
       </BrowserRouter>
