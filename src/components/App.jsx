@@ -5,6 +5,7 @@ import UserContext from "../Context/UserContext";
 
 import Login from "./Screens/Login";
 import Register from "./Screens/Register";
+import Balance from "./Screens/Balance";
 
 export default function App() {
   return (
@@ -14,7 +15,8 @@ export default function App() {
           <GlobalStyle />
           <Routes>
             <Route path="/" element={<Login />}></Route>
-            <Route path="/" element={<Register />}></Route>
+            <Route path="/register" element={<Register />}></Route>
+            <Route path="/balance" element={<Balance />}></Route>
           </Routes>
         </UserContext.Provider>
       </BrowserRouter>

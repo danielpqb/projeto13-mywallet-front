@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import InputBox from "../InputBox";
-import Logo from "../Logo";
-import SubmitButton from "../SubmitButton";
+import InputBox from "../Common/InputBox";
+import Logo from "../Common/Logo";
+import SubmitButton from "../Common/SubmitButton";
 
 export default function Login() {
   function handleSubmit(e) {

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import InputBox from "../InputBox";
-import Logo from "../Logo";
-import SubmitButton from "../SubmitButton";
+import InputBox from "../Common/InputBox";
+import Logo from "../Common/Logo";
+import SubmitButton from "../Common/SubmitButton";
 
 export default function Register() {
   function handleSubmit(e) {
@@ -14,13 +14,15 @@ export default function Register() {
       <Logo />
 
       <RegisterForm action="" onSubmit={handleSubmit}>
+        <InputBox name="name" placeholder="Nome" />
         <InputBox name="email" placeholder="Email" />
         <InputBox name="password" placeholder="Senha" />
+        <InputBox name="confirmPassword" placeholder="Confirme a senha" />
 
-        <SubmitButton>Entrar</SubmitButton>
+        <SubmitButton>Cadastrar</SubmitButton>
       </RegisterForm>
 
-      <Link to={"/register"}>Primeira vez? Cadastre-se!</Link>
+      <Link to={"/"}>Já tem uma conta? Entre agora!</Link>
     </Container>
   );
 }
