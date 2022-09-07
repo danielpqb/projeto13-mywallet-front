@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import BalanceBox from "../Common/BalanceBox";
+import Footer from "../Common/Footer";
+import Header from "../Common/Header";
 
 export default function Balance() {
   return (
     <Container>
-      <h1>Olá, Fulano</h1>
-      <div></div>
+      <Header>Olá, Fulano</Header>
+      <BalanceBox />
+      <Footer />
     </Container>
   );
 }
@@ -25,6 +29,5 @@ const Container = styled.div`
 
   h1 {
     font-weight: 700;
-    font-size: 26px;
   }
 `;
