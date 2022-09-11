@@ -1,12 +1,25 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import InputBox from "../Common/InputBox";
 import Logo from "../Common/Logo";
 import SubmitButton from "../Common/SubmitButton";
 
 export default function Login() {
-  function handleSubmit(e) {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
     e.preventDefault();
+
+    await axios.get("http://localhost:5000/", form);
+
+    navigate("/balance");
   }
 
   return (
@@ -14,8 +27,22 @@ export default function Login() {
       <Logo />
 
       <RegisterForm action="" onSubmit={handleSubmit}>
-        <InputBox name="email" placeholder="Email" />
-        <InputBox name="password" placeholder="Senha" />
+        <InputBox
+          name="email"
+          placeholder="Email"
+          onChange={(e) => {
+            setForm({ ...form, email: e.target.value });
+          }}
+          value={form.email}
+        />
+        <InputBox
+          name="password"
+          placeholder="Senha"
+          onChange={(e) => {
+            setForm({ ...form, password: e.target.value });
+          }}
+          value={form.password}
+        />
 
         <SubmitButton>Entrar</SubmitButton>
       </RegisterForm>

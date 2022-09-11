@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function InputBox({ name, placeholder }) {
-  const [text, setText] = React.useState("");
-
+export default function InputBox({ name, placeholder, onChange, value }) {
   return (
     <Container>
       <input
@@ -11,10 +9,8 @@ export default function InputBox({ name, placeholder }) {
         placeholder={placeholder}
         name={name}
         required
-        value={text}
-        onChange={(e) => {
-          setText(e.target.value);
-        }}
+        value={value}
+        onChange={onChange}
       />
     </Container>
   );

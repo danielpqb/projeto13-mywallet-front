@@ -1,12 +1,27 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import InputBox from "../Common/InputBox";
 import Logo from "../Common/Logo";
 import SubmitButton from "../Common/SubmitButton";
 
 export default function Register() {
-  function handleSubmit(e) {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
     e.preventDefault();
+
+    await axios.post("http://localhost:5000/register", form);
+
+    navigate("/");
   }
 
   return (
@@ -14,10 +29,38 @@ export default function Register() {
       <Logo />
 
       <RegisterForm action="" onSubmit={handleSubmit}>
-        <InputBox name="name" placeholder="Nome" />
-        <InputBox name="email" placeholder="Email" />
-        <InputBox name="password" placeholder="Senha" />
-        <InputBox name="confirmPassword" placeholder="Confirme a senha" />
+        <InputBox
+          name="name"
+          placeholder="Nome"
+          onChange={(e) => {
+            setForm({ ...form, name: e.target.value });
+          }}
+          value={form.name}
+        />
+        <InputBox
+          name="email"
+          placeholder="Email"
+          onChange={(e) => {
+            setForm({ ...form, email: e.target.value });
+          }}
+          value={form.email}
+        />
+        <InputBox
+          name="password"
+          placeholder="Senha"
+          onChange={(e) => {
+            setForm({ ...form, password: e.target.value });
+          }}
+          value={form.password}
+        />
+        <InputBox
+          name="confirmPassword"
+          placeholder="Confirme a senha"
+          onChange={(e) => {
+            setForm({ ...form, confirmPassword: e.target.value });
+          }}
+          value={form.confirmPassword}
+        />
 
         <SubmitButton>Cadastrar</SubmitButton>
       </RegisterForm>
