@@ -59,6 +59,8 @@ const Container = styled.div`
 
     background: #ffffff;
     border-radius: 5px;
+
+    overflow: hidden;
   }
 `;
 
@@ -105,6 +107,14 @@ const Transactions = styled.div`
     justify-content: flex-start;
 
     overflow: scroll;
+
+    /* Hide Scroll Bars */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  &::-webkit-scrollbar {
+    /* Hide Scroll Bars */
+    display: none; /* Chrome, Safari and Opera */
   }
 `;
 

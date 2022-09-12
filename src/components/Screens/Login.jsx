@@ -17,21 +17,31 @@ export default function Login() {
 
   const navigate = useNavigate();
 
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+
   function handleSubmit(e) {
     e.preventDefault();
 
-    axios.post("http://localhost:5000/login", form).then((res) => {
-      const { token, email, name, transactions } = res.data;
+    setIsSubmitDisabled(true);
 
-      setUserData({
-        ...userData,
-        token: token,
-        email: email,
-        name: name,
-        transactions: transactions,
+    axios
+      .post("http://localhost:5000/login", form)
+      .then((res) => {
+        const { token, email, name, transactions } = res.data;
+
+        setUserData({
+          ...userData,
+          token: token,
+          email: email,
+          name: name,
+          transactions: transactions,
+        });
+        navigate("/balance");
+      })
+      .catch((res) => {
+        setIsSubmitDisabled(false);
+        throw res;
       });
-      navigate("/balance");
-    });
   }
 
   return (
@@ -56,7 +66,7 @@ export default function Login() {
           value={form.password}
         />
 
-        <SubmitButton>Entrar</SubmitButton>
+        <SubmitButton disabled={isSubmitDisabled}>Entrar</SubmitButton>
       </RegisterForm>
 
       <Link to={"/register"}>Primeira vez? Cadastre-se!</Link>
