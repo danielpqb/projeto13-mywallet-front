@@ -3,22 +3,19 @@ import { useContext } from "react";
 import styled from "styled-components";
 import UserContext from "../../Context/UserContext";
 
-// let balanceData = [
-//   { date: "30/11", text: "Almoço mãe", value: -39.9 },
-//   { date: "27/11", text: "Mercado", value: -542.54 },
-//   { date: "26/11", text: "Compras churrasco", value: -67.6 },
-//   { date: "20/11", text: "Empréstimo Maria", value: 500 },
-//   { date: "15/11", text: "Salário", value: 3000 },
-// ];
-
-const balanceTotalValue = 2849.96;
-
 export default function BalanceBox() {
   const { userData } = useContext(UserContext);
 
-  const balanceData = userData.transactions;
+  function getTotal() {
+    let total = 0;
+    userData.transactions.forEach((transaction) => {
+      total += transaction.value;
+    });
+    return total;
+  }
 
-  console.log(balanceData);
+  const balanceData = userData.transactions;
+  const total = getTotal();
 
   return (
     <Container>
@@ -37,7 +34,7 @@ export default function BalanceBox() {
           </Transactions>
           <TotalValue>
             <div>Saldo</div>
-            <div>{balanceTotalValue.toFixed(2).replaceAll(".", ",")}</div>
+            <div>{total.toFixed(2).replaceAll(".", ",")}</div>
           </TotalValue>
         </>
       ) : (

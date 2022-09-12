@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import UserContext from "../../Context/UserContext";
 import BalanceBox from "../Common/BalanceBox";
@@ -6,11 +6,7 @@ import Footer from "../Common/Footer";
 import Header from "../Common/Header";
 
 export default function Balance() {
-  const { userData, setUserData } = useContext(UserContext);
-
-  useEffect(() => {
-    console.log(userData);
-  }, [userData, setUserData]);
+  const { userData } = useContext(UserContext);
 
   return (
     <Container>
