@@ -1,12 +1,15 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import UserContext from "../../Context/UserContext";
 import InputBox from "../Common/InputBox";
 import Logo from "../Common/Logo";
 import SubmitButton from "../Common/SubmitButton";
 
 export default function Login() {
+  const { userData, setUserData } = useContext(UserContext);
+
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -14,12 +17,21 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
 
-    await axios.get("http://localhost:5000/", form);
+    axios.post("http://localhost:5000/login", form).then((res) => {
+      const { token, email, name, transactions } = res.data;
 
-    navigate("/balance");
+      setUserData({
+        ...userData,
+        token: token,
+        email: email,
+        name: name,
+        transactions: transactions,
+      });
+      navigate("/balance");
+    });
   }
 
   return (

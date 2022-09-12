@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export default function Header() {
+export default function Header({ children }) {
   return (
     <Container>
-      <h1>Olá, Fulano</h1>
+      <h1>{children}</h1>
       <ion-icon name="exit-outline"></ion-icon>
     </Container>
   );

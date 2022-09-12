@@ -9,11 +9,15 @@ import Balance from "./Screens/Balance";
 import NewIncome from "./Screens/NewIncome";
 import NewSpent from "./Screens/NewSpent";
 
+import { useState } from "react";
+
 export default function App() {
+  const [userData, setUserData] = useState({ token: null });
+
   return (
     <Container>
       <BrowserRouter>
-        <UserContext.Provider value={{}}>
+        <UserContext.Provider value={{ userData, setUserData }}>
           <GlobalStyle />
           <Routes>
             <Route path="/" element={<Login />}></Route>
