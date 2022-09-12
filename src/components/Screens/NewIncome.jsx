@@ -56,7 +56,10 @@ export default function NewIncome() {
           name="value"
           placeholder="Valor"
           onChange={(e) => {
-            setForm({ ...form, value: e.target.value });
+            const _value = (e.target.value.replaceAll(/\D/g, "") / 100).toFixed(
+              2
+            );
+            setForm({ ...form, value: _value });
           }}
           value={form.value}
         />
