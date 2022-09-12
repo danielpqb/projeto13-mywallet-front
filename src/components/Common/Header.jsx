@@ -1,10 +1,24 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import UserContext from "../../Context/UserContext";
 
 export default function Header({ children }) {
+  const { setUserData } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
   return (
     <Container>
       <h1>{children}</h1>
-      <ion-icon name="exit-outline"></ion-icon>
+      <Icon
+        onClick={() => {
+          setUserData({ token: null });
+          navigate("/");
+        }}
+      >
+        <ion-icon name="exit-outline"></ion-icon>
+      </Icon>
     </Container>
   );
 }
@@ -21,6 +35,12 @@ const Container = styled.div`
     font-size: 26px;
 
     padding: 20px 0px;
+  }
+`;
+
+const Icon = styled.div`
+  & {
+    justify-content: flex-end;
   }
 
   ion-icon {

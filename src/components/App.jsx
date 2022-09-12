@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import { GlobalStyle } from "../GlobalStyles";
 import UserContext from "../Context/UserContext";
@@ -9,10 +9,14 @@ import Balance from "./Screens/Balance";
 import NewIncome from "./Screens/NewIncome";
 import NewSpent from "./Screens/NewSpent";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function App() {
   const [userData, setUserData] = useState({ token: null });
+
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   return (
     <Container>
@@ -21,10 +25,18 @@ export default function App() {
           <GlobalStyle />
           <Routes>
             <Route path="/" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="/balance" element={<Balance />}></Route>
-            <Route path="/new-income" element={<NewIncome />}></Route>
-            <Route path="/new-spent" element={<NewSpent />}></Route>
+            {userData.token ? (
+              <>
+                <Route path="/register" element={<Register />}></Route>
+                <Route path="/balance" element={<Balance />}></Route>
+                <Route path="/new-income" element={<NewIncome />}></Route>
+                <Route path="/new-spent" element={<NewSpent />}></Route>
+              </>
+            ) : (
+              <>
+                <Route path="*" element={<Navigate to="/" />}></Route>
+              </>
+            )}
           </Routes>
         </UserContext.Provider>
       </BrowserRouter>
