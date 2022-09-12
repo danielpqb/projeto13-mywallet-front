@@ -15,7 +15,7 @@ export default function App() {
   const [userData, setUserData] = useState({ token: null });
 
   useEffect(() => {
-    console.log(userData);
+    //console.log(userData);
   }, [userData]);
 
   return (
@@ -25,9 +25,9 @@ export default function App() {
           <GlobalStyle />
           <Routes>
             <Route path="/" element={<Login />}></Route>
+            <Route path="/register" element={<Register />}></Route>
             {userData.token ? (
               <>
-                <Route path="/register" element={<Register />}></Route>
                 <Route path="/balance" element={<Balance />}></Route>
                 <Route path="/new-income" element={<NewIncome />}></Route>
                 <Route path="/new-spent" element={<NewSpent />}></Route>
