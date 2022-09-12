@@ -19,6 +19,11 @@ export default function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (form.password !== form.confirmPassword) {
+      alert("Password and ConfirmPassword must be equal!");
+      return;
+    }
+
     await axios.post("http://localhost:5000/register", form);
 
     navigate("/");
@@ -47,6 +52,7 @@ export default function Register() {
         />
         <InputBox
           name="password"
+          type="password"
           placeholder="Senha"
           onChange={(e) => {
             setForm({ ...form, password: e.target.value });
@@ -55,6 +61,7 @@ export default function Register() {
         />
         <InputBox
           name="confirmPassword"
+          type="password"
           placeholder="Confirme a senha"
           onChange={(e) => {
             setForm({ ...form, confirmPassword: e.target.value });

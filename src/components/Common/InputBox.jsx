@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function InputBox({ name, placeholder, onChange, value }) {
+export default function InputBox({ name, placeholder, onChange, value, type }) {
   return (
     <Container>
       <input
-        type="text"
+        type={type ? type : "text"}
         placeholder={placeholder}
         name={name}
         required

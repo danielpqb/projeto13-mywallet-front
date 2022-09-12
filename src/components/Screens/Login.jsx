@@ -59,6 +59,7 @@ export default function Login() {
         />
         <InputBox
           name="password"
+          type="password"
           placeholder="Senha"
           onChange={(e) => {
             setForm({ ...form, password: e.target.value });
