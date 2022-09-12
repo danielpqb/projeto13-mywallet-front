@@ -1,10 +1,49 @@
+import axios from "axios";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import UserContext from "../../Context/UserContext";
 import InputBox from "../Common/InputBox";
 import SubmitButton from "../Common/SubmitButton";
 
 export default function NewIncome() {
+  const { userData, setUserData } = useContext(UserContext);
+
+  const [form, setForm] = useState({
+    value: "",
+    description: "",
+  });
+
+  const navigate = useNavigate();
+
   function handleSubmit(e) {
     e.preventDefault();
+
+    axios
+      .post(
+        "http://localhost:5000/transactions",
+        { ...form, value: parseFloat(form.value), date: Date.now() },
+        {
+          headers: {
+            Authorization: `Bearer ${userData.token}`,
+          },
+        }
+      )
+      .then(() => {
+        axios
+          .get("http://localhost:5000/transactions", {
+            headers: {
+              Authorization: `Bearer ${userData.token}`,
+            },
+          })
+          .then((res) => {
+            setUserData({
+              ...userData,
+              transactions: res.data.transactions,
+            });
+            navigate("/balance");
+          });
+      });
   }
 
   return (
@@ -13,8 +52,22 @@ export default function NewIncome() {
         <h1>Nova entrada</h1>
       </Title>
       <RegisterForm action="" onSubmit={handleSubmit}>
-        <InputBox name="value" placeholder="Valor" />
-        <InputBox name="description" placeholder="Descrição" />
+        <InputBox
+          name="value"
+          placeholder="Valor"
+          onChange={(e) => {
+            setForm({ ...form, value: e.target.value });
+          }}
+          value={form.value}
+        />
+        <InputBox
+          name="description"
+          placeholder="Descrição"
+          onChange={(e) => {
+            setForm({ ...form, description: e.target.value });
+          }}
+          value={form.description}
+        />
 
         <SubmitButton>Salvar entrada</SubmitButton>
       </RegisterForm>

@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useContext } from "react";
 import styled from "styled-components";
 import UserContext from "../../Context/UserContext";
@@ -17,6 +18,8 @@ export default function BalanceBox() {
 
   const balanceData = userData.transactions;
 
+  console.log(balanceData);
+
   return (
     <Container>
       {balanceData.length > 0 ? (
@@ -25,8 +28,8 @@ export default function BalanceBox() {
             {balanceData.map((transaction, index) => {
               return (
                 <Transaction isNegative={transaction.value < 0} key={index}>
-                  <div>{transaction.date}</div>
-                  <div>{transaction.text}</div>
+                  <div>{dayjs(transaction.date).format("DD/MM")}</div>
+                  <div>{transaction.description}</div>
                   <div>{transaction.value.toFixed(2).replaceAll(".", ",")}</div>
                 </Transaction>
               );
