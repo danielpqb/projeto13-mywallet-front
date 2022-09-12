@@ -59,8 +59,6 @@ const Container = styled.div`
 
     background: #ffffff;
     border-radius: 5px;
-
-    overflow: hidden;
   }
 `;
 
@@ -129,6 +127,7 @@ const Transaction = styled.div`
   }
 
   div:nth-child(1) {
+    justify-content: flex-start;
     min-width: 60px;
     width: 60px;
     color: #c6c6c6;
